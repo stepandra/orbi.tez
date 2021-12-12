@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Eat cells smaller than you and don't get eaten by the bigger ones, as an MMO">
-    <meta name="keywords" content="agario, agar, io, cell, cells, virus, bacteria, blob, game, games, web game, html5, fun, flash">
+    <meta name="keywords"
+        content="agario, agar, io, cell, cells, virus, bacteria, blob, game, games, web game, html5, fun, flash">
     <meta name="robots" content="index, follow">
-    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Cigar2</title>
@@ -38,16 +40,18 @@
 
             <div class="form-group">
                 <input id="nick" class="form-control" placeholder="Nickname" maxlength="15">
-                <input id="skin" class="form-control"  placeholder="Skin Name">
+                <input id="skin" class="form-control" placeholder="Skin Name">
                 <select id="gamemode" class="form-control" onchange="setserver(this.value)" required>
-                    <option value="localhost:443" selected>Local 443</option>
-                    <option value="localhost:8080" selected>Local 8080</option>
+                    <option value="0.0.0.0:443" selected>orbitez.io 443</option>
+                    <option value="0.0.0.0:8080" selected>orbi.tez 8080</option>
                 </select>
             </div>
 
             <button id="play-btn" class="btn btn-play btn-primary btn-needs-server">Play</button>
-            <button id="spectate-btn" onclick="spectate()" class="btn btn-warning btn-spectate btn-needs-server glyphicon glyphicon-eye-open"></button>
-            <button id="gallery-btn" onclick="openSkinsList()" class="btn btn-play btn-primary btn-needs-server btn-info">Skins Gallery</button>
+            <button id="spectate-btn" onclick="spectate()"
+                class="btn btn-warning btn-spectate btn-needs-server glyphicon glyphicon-eye-open"></button>
+            <button id="gallery-btn" onclick="openSkinsList()"
+                class="btn btn-play btn-primary btn-needs-server btn-info">Skins Gallery</button>
 
             <div id="settings" class="checkbox">
                 <div style="margin: 6px;">
@@ -94,7 +98,8 @@
     <div id="connecting">
         <div id="connecting-content">
             <h2>Connecting</h2>
-            <p> If you cannot connect to the servers, check if you have some anti virus or firewall blocking the connection.</p>
+            <p> If you cannot connect to the servers, check if you have some anti virus or firewall blocking the
+                connection.</p>
         </div>
     </div>
 
@@ -109,4 +114,5 @@
     <input type="text" id="chat_textbox" placeholder="Press enter to chat" maxlength="200">
     <div style="font-family:'Ubuntu'">&nbsp;</div>
 </body>
+
 </html>
