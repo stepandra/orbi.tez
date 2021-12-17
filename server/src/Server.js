@@ -9,7 +9,7 @@ const WebSocket = require("ws");
 const Entity = require('./entity');
 const Vec2 = require('./modules/Vec2.js');
 const Logger = require('./modules/Logger.js');
-const {QuadNode, Quad} = require('./modules/QuadNode.js');
+const { QuadNode, Quad } = require('./modules/QuadNode.js');
 const Player = require('./Player');
 const Client = require('./Client');
 const PlayerCommand = require('./modules/PlayerCommand');
@@ -79,7 +79,7 @@ class Server {
         // Check if certificates exist
         if (fs.existsSync('../keys/key.pem') && fs.existsSync('../keys/cert.pem')) {
             Logger.info("Using HTTPS, use the wss:// protocol prefix when connecting");
-            this.httpServer = https.createServer({key: fs.readFileSync('../keys/key.pem', 'utf8'), cert: fs.readFileSync('../keys/cert.pem', 'utf8')});
+            this.httpServer = https.createServer({ key: fs.readFileSync('../keys/key.pem', 'utf8'), cert: fs.readFileSync('../keys/cert.pem', 'utf8') });
         } else {
             // HTTP only
             Logger.info("Using HTTP");
@@ -201,7 +201,7 @@ class Server {
             }
             this.socketCount--;
             ws.isConnected = false;
-            ws.client.sendPacket = () => {};
+            ws.client.sendPacket = () => { };
             ws.closeReason = {
                 reason: ws._closeCode,
                 message: ws._closeMessage
@@ -447,6 +447,7 @@ class Server {
         setTimeout(this.mainLoopBind, 0);
         setTimeout(this.timerLoopBind, 0);
     }
+    // Главный цикл. 
     mainLoop() {
         this.stepDateTime = Date.now();
         var tStart = process.hrtime();
@@ -688,6 +689,8 @@ class Server {
         cell.color = this.getRandomColor();
         this.addNode(cell);
     }
+    // Вирусы
+
     spawnVirus() {
         var virus = new Entity.Virus(this, null, this.randomPos(), this.config.virusMinSize);
         this.safeSpawn(virus);
