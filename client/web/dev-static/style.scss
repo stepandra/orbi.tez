@@ -1,0 +1,316 @@
+/*  ---------------------------------------------------------------
+01.	Base Styles
+02.	Structure
+03.	Content
+    -------------------------------------------------------------*/
+
+	// TODO: move to _variables.scss
+	$color-main: #04dbe0;
+
+	$text-shadow: 1px 0 18px #04dbe0, 0 1px 0 #00d2e7;
+
+	$border-radius: 4px;
+	$transition-time: 0.3s;
+
+	// TODO: move to _mixin.scss
+	@mixin button($font-size: 1.4rem, $min-width: 180px, $min-height: 50px) {
+		border-radius: $btn_border_radius;
+		padding: 5px 40px;
+		max-width: 280px;
+		min-width: $min-width;
+		min-height: $min-height;
+		font-size: $font-size;
+		line-height: 1.2;
+		font-weight: 700;
+		text-align: center;
+		text-transform: uppercase;
+		text-decoration: none;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition: all $transition-time ease-out;
+	}
+
+	// TODO: move to _fonts.scss
+	@font-face {
+		font-family: "AnitaRegular";
+		src: url('fonts/anita.ttf');
+		font-display: swap;
+	}
+
+
+/*---------------------------------------------------------------*/
+/* 01. Base Styles
+/*---------------------------------------------------------------*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	background-color: #081037;
+	//background-position: center;
+	background-repeat: no-repeat;
+	//background-size: cover;
+	background-image: url(img/bg.jpg);
+	color: #FFFFFF;
+	font-family: "AnitaRegular", "Calibri", "Arial", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.5;
+	position: relative;
+	overflow-x: hidden;
+}
+
+img {
+	border: 0;
+	max-width: 100%;
+}
+
+h1 {
+	font-weight: 400;
+	font-size: 50px;
+	line-height: 120%;
+}
+
+h2 {
+	text-shadow: 1px 0 38px #04dbe0, 0 1px 0 #00d2e7;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 1.6;
+}
+
+h3 {
+	font-size: 24px;
+	line-height: 120%; // 29px
+}
+
+p {
+	font-size: 16px;
+	line-height: 160%; // 26px
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	outline: none;
+	color: $color-main;
+	text-decoration: none;
+}
+
+input,
+select {
+	width: 100%;
+	margin-top: 8px;
+	padding: 8px 16px;
+	background-color: #F8F9FE;
+	border-radius: 8px;
+	border: none;
+	outline: 0;
+}
+
+
+
+/*---------------------------------------------------------------*/
+/* 02. Structure
+/*---------------------------------------------------------------*/
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 180px;
+	padding-top: 35px;
+	padding-bottom: 45px;
+
+	&__link {
+		display: block;
+		margin-inline-start: 5%;
+	}
+
+	&__title {
+		margin: 0 auto;
+		text-align: center;
+		text-shadow: 1px 0 38px #04dbe0, 0 1px 0 #00d2e7;
+	}
+}
+
+.page {
+	display: flex;
+	justify-content: space-between;
+
+	&__left {
+		width: 450px;
+	}
+
+	&__center {
+		width: 100%;
+	}
+
+	&__right {
+		width: 450px;
+	}
+}
+
+.container {
+	width: 100%;
+	max-width: calc(1700px + 48px);
+	margin: 0 auto;
+	padding-right: 24px;
+	padding-left: 24px;
+
+	&--small {
+		max-width: calc(1160px + 32px);
+	}
+
+	&--big {
+		max-width: calc(1920px - 32px);
+	}
+}
+
+.btn {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 340px;
+    min-width: 220px;
+    min-height: 60px; // in design 70px
+	padding: 5px 20px;
+	background-color: rgba(4, 219, 224, 0.11);
+	color: #FFFFFF;
+	font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+	text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+	text-shadow: 0 1px 0 #00d2e7;
+	border: 1px solid #c3beca;
+    cursor: pointer;
+    transition: all $transition-time ease-out;
+	//@include button(-size, -width, -height);
+
+	&:hover {
+		border-color: #04dbe0;
+		color: #04dbe0;
+		text-shadow: 1px 0 18px #04dbe0, 0 1px 0 #00d2e7;
+	}
+
+	&--wide {
+		width: 100%;
+	}
+
+	&--center {
+		margin: 0 auto;
+	}
+
+	// TODO: refactor
+	&--second {
+		margin-top: 48px;
+	}
+}
+
+.balance {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 325px;
+	height: 100px;
+	padding: 16px 40px 16px 30px;
+	background: linear-gradient(90deg, rgba(0,0,0,0) 2%, rgba(0,0,0,0.2) 10%, rgba(0,0,0,0.2) 100%);
+	text-shadow: #04dbe0 1px 0 18px;
+}
+
+.listBlock {
+	margin-bottom: 120px; // design 150px
+
+	&__list {
+		margin-top: 30px; // design 50px
+	}
+
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		width: 324px;
+		height: 50px;
+		margin-bottom: 7px;
+		padding: 12px 16px;
+		border-radius: 4px;
+		border: 1px solid #293253;
+		background-color: #050e2e;
+		color: #a6a8ae;
+
+		&:hover {
+			border-color: #04dbe0;
+			box-shadow: #04dbe0 0 0 5px;
+			text-shadow: #04dbe0 1px 0 18px;
+			color: #FFFFFF;
+			cursor: pointer;
+		}
+
+		&--active {
+			border-color: #627087;
+			background-color: #062e50;
+			color: #FFFFFF;
+		}
+	}
+}
+
+.lBoardLink {
+	color: #FFFFFF;
+	font-size: 28px;
+	line-height: 32px;
+	text-align: center;
+	text-decoration: underline;
+
+	&:hover {
+		color: #857a98;
+		text-shadow: $text-shadow;
+	}
+}
+
+.planet {
+	// display: flex;
+	// justify-content: center;
+	// align-items: flex-start;
+	min-height: 880px;
+	text-align: center;
+
+	&--bgCircle {
+		background-position: bottom;
+		background-repeat: no-repeat;
+		background-image: url(img/planet-bg.png);
+	}
+
+	&__img {
+		display: block;
+		max-width: 440px;
+		margin: 0 auto;
+	}
+
+	&__btn {
+		margin-top: 96px;
+		margin-bottom: 50px;
+		background-image: url("img/btn-bg.png");
+		background-repeat: no-repeat;
+		border: 1px solid #FFFFFF;
+		background-color: rgba(4, 219, 224, 0.11);
+		box-shadow: inset 0px 5px 76px 0px rgba(4, 219, 224, 0.3), 0 0 10px 5px #04dbe0;
+	}
+}
+
+
+
+@media (max-width: 1748px) { //------------------------------------------------------------------------------------ 1748
+
+	.header {
+		&__link {
+			margin-inline-start: 24px
+		}
+	}
+	
+}
