@@ -1,8 +1,14 @@
 type enterRoomParameter = {
     is_lp: bool,
     bank: tez
-}
+};
+
 type refundParameter = (address);
+
+
+type endgameParameter = list(address);
+
+
 
 // type endGameParameter = map(address)
 // type modifySetupParameter = {
@@ -13,8 +19,9 @@ type refundParameter = (address);
 // }
 
 type roomEntrypoints = 
-  EnterRoom(enterRoomParameter)
-| Refund(refundParameter);
+| EnterRoom(enterRoomParameter)
+| Refund(refundParameter)
+| EndGame(endgameParameter);
 // | EndGame(endGameParameter);
 // | PauseEntry(bool)
 // | ModifySetup(modifySetupParameter);
@@ -34,9 +41,9 @@ type storage = {
     // accepted_tokens: set(address),
     // leaderboard: list(address),
     counter: nat,
-}
+};
     
-type returnType = (list (operation), storage);
+type returnType = ( list (operation), storage );
 
 let addr_to_contract = (addr: address) => {
     let maybe_contract: option(contract(unit)) = Tezos.get_contract_opt(addr);
@@ -105,10 +112,33 @@ let enter_room = ((param, store): (enterRoomParameter, storage)) : returnType =>
      (([]: list(operation)), store);
 };
 
+
+
+let endgame = ((leader_list, store): ( endgameParameter, storage )) : returnType => {
+  
+    let reward_list_tez: list (tez) = [4_000_000mutez, 2_500_000mutez, 1_500_000mutez];
+    let reward_list_token: list(nat) = [40n, 25n, 15n, 3n, 3n, 3n, 3n, 3n, 3n, 3n];
+
+    let convert = (i : address) : contract(unit) => addr_to_contract( i );
+    let contract_leader_list : list (contract(unit)) = List.map (convert, leader_list);
+
+    
+
+let op1 =  Tezos.transaction((), Option.unopt(List.head_opt(reward_list_tez)) , Option.unopt(List.head_opt(contract_leader_list)));
+let op2 = Tezos.transaction((), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(reward_list_tez)))), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(contract_leader_list)))));
+let op3 = Tezos.transaction((), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(Option.unopt(List.tail_opt(reward_list_tez)))))), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(Option.unopt(List.tail_opt(contract_leader_list)))))));
+     
+
+
+    let room_reset: register = Map.empty;
+
+
+   (([op1, op2, op3]: list(operation)), { ...store, players:room_reset, counter: 0n });  
+};
+
 let main = ((action, store): (roomEntrypoints, storage)) : returnType =>
     switch (action) {
     | EnterRoom(param) => enter_room(param, store)
     | Refund(param) => refund(param, store)
+    | EndGame(param) => endgame(param,store)
     };
-
-
