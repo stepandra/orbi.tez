@@ -4,11 +4,14 @@ P2E canvas game with NFT pass/skin and DeFi mechanics
 
 
 
-https://orbitez.io
-https://orbitez.io/dashboard
+- [Landing page ](https://orbitez.io)
+- [Dashboard ](https://orbitez.io/dashboard)
 
 
-## Transactions flow | Mechanics
+- [Latest room contract: KT1XBiXsYnZdzGQPb2yi6EeEPQoUqAh7xUCf](https://better-call.dev/hangzhou2net/KT1XBiXsYnZdzGQPb2yi6EeEPQoUqAh7xUCf/operations)
+- [ORB token FA2 contract: KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg](https://better-call.dev/hangzhou2net/KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg/operations)
+
+## Transactions flow | Liquidity Mechanics
 
 1) Mint or buy for 1tez unique orbitoid to get into game
 2) Each 0.8tez from primary sale -> liquidity pool with ORB token.
