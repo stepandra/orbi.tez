@@ -27,8 +27,8 @@ export default function hud() {
                         <input id="nick" class="form-control" placeholder="Nickname" maxlength="15">
                         <input id="skin" class="form-control" placeholder="Skin Name">
                         <select id="gamemode" class="form-control" onchange="setserver(this.value)" required>
-                            <option value="0.0.0.0:443" selected>orbitez.io 443</option>
-                            <option value="0.0.0.0:8080" selected>orbi.tez 8080</option>
+                           
+                            <option value="161.35.66.46:8080" selected>orbi.tez 8080</option>
                         </select>
                     </div>
 
