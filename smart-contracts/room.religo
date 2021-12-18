@@ -1,10 +1,15 @@
 type enterRoomParameter = {
     is_lp: bool,
     bank: tez
-}
-type refundParameter = {
-    refundAddr: address,
 };
+
+type refundParameter = (address);
+
+
+type endgameParameter = list(address);
+
+
+
 // type endGameParameter = map(address)
 // type modifySetupParameter = {
 //     mod_blocks_in_round: nat, 
@@ -14,60 +19,128 @@ type refundParameter = {
 // }
 
 type roomEntrypoints = 
-  EnterRoom(enterRoomParameter)
-| Refund(refundParameter);
+| EnterRoom(enterRoomParameter)
+| Refund(refundParameter)
+| EndGame(endgameParameter);
 // | EndGame(endGameParameter);
 // | PauseEntry(bool)
 // | ModifySetup(modifySetupParameter);
-type register = map (address, int);
-type storage = {
-    admin: address,
-    start_block: nat,
-    end_block: nat,
-    bank_in_tez: tez,
-    bank_in_tokens: nat,
-    lobby_is_open: bool,
-    players: register,
-    pause_on: bool,
-    blocks_in_round: nat,
-    players_max: nat,
-    orb_rewards: list(nat),
-    accepted_tokens: set(address),
-    leaderboard: list(address),
-    counter: int,
-}
+type register = map (address, nat);
 
-type returnType = (list (operation), storage);
-// redo
-let refund  = ((param, store): (refundParameter, storage)) : returnType => {
-    let refund_addr = param.refundAddr;
-    (([]: list(operation)), store);
+type storage = {
+    // admin: address,
+    // start_block: nat,
+    // end_block: nat,
+    // bank_in_tez: tez,
+    // bank_in_tokens: nat,
+    // lobby_is_open: bool,
+    players: register,
+    // pause_on: bool,
+    // blocks_in_round: nat,
+    // players_max: nat,
+    // orb_rewards: list(nat),
+    // accepted_tokens: set(address),
+    // leaderboard: list(address),
+    counter: nat,
+};
+    
+type returnType = ( list (operation), storage );
+
+let addr_to_contract = (addr: address) => {
+    let maybe_contract: option(contract(unit)) = Tezos.get_contract_opt(addr);
+    switch (maybe_contract) {
+        | Some (contract) => contract
+        | None => (failwith ("Contract not found.") : contract (unit))
+        };
+    }
+
+    let removePlayer = ( store : storage ): map(address, nat) => {
+    let player_refund: option (nat) = Map.find_opt(Tezos.sender, store.players);
+    switch (player_refund) {
+        | Some (entrys) => Map.remove(Tezos.sender, store.players)
+        | None => (failwith ("Nothing to refund!"): map(address, nat))
+        };
+    }
+
+
+// TODO:Refun
+let refund  = ((action, store): (refundParameter, storage)) : returnType => {
+    // let refund_addr = param.refundAddr;
+    // let dest:address = (Tezos.sender);git 
+    if (Map.size(store.players) == 10n) {
+        (failwith ("Game already started! Play or die!"): returnType);
+    } else {
+    // let counter : contract(refundParameter) =
+    let dest = addr_to_contract(Tezos.sender);
+    let op = Tezos.transaction((), 1tez, dest);
+    (([op]: list(operation)), {...store, players: removePlayer(store)})
+    }
 } 
 
-let increase = ((store) : (storage)) : returnType =>  (([]: list(operation)), {...store, counter:store.counter+1});
+
+let addPlayer = ( store : storage ): map(address,nat) => {
+    let  player_points: option (nat) = Map.find_opt(Tezos.sender, store.players);
+    switch (player_points) {
+        | Some(points) => 
+            (failwith("You are already"): map(address, nat));
+        | None => 
+            Map.add(Tezos.sender, store.counter, store.players)
+    };
+};
+
+[@inline]
+let add = ((s, counter): (storage, nat)): storage => {...s, counter: s.counter + counter};
 
 let enter_room = ((param, store): (enterRoomParameter, storage)) : returnType => {
-    let add = (m: register): register => 
-        Map.add ((Tezos.sender : address), store.counter, m);
 
     let is_lp = param.is_lp;
     let bank = param.bank;
-    
     let players = store.players;
     let current_player : address = Tezos.sender;
     let enter_price: tez = 1tez;
     if (Tezos.amount == enter_price) {
-        if (Map.size(players) > 10n) {
-            failwith("Room is full, go fuck yourself!")
-            } else {();}
+        if (Map.size(players) > 9n) {
+            failwith("Room is full, try again later!")
+            } else {
+            //   let new_map = (m : register) : register => Map.add ((Tezos.sender : address), store.counter, store.players);
+            // let add_player = ((players, s): (storage, storage)): map( address, int) => {...s, players : new_map } ;
+            ();
+            }
     } else {
         failwith("Incorrect amount of 1tez.");
     };
+
+    let store = add({players: addPlayer(store), counter: store.counter}, 1n);
      (([]: list(operation)), store);
+};
+
+
+
+let endgame = ((leader_list, store): ( endgameParameter, storage )) : returnType => {
+  
+    let reward_list_tez: list (tez) = [4_000_000mutez, 2_500_000mutez, 1_500_000mutez];
+    let reward_list_token: list(nat) = [40n, 25n, 15n, 3n, 3n, 3n, 3n, 3n, 3n, 3n];
+
+    let convert = (i : address) : contract(unit) => addr_to_contract( i );
+    let contract_leader_list : list (contract(unit)) = List.map (convert, leader_list);
+
+    
+
+let op1 =  Tezos.transaction((), Option.unopt(List.head_opt(reward_list_tez)) , Option.unopt(List.head_opt(contract_leader_list)));
+let op2 = Tezos.transaction((), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(reward_list_tez)))), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(contract_leader_list)))));
+let op3 = Tezos.transaction((), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(Option.unopt(List.tail_opt(reward_list_tez)))))), Option.unopt(List.head_opt(Option.unopt(List.tail_opt(Option.unopt(List.tail_opt(contract_leader_list)))))));
+     
+
+
+    let room_reset: register = Map.empty;
+
+
+   (([op1, op2, op3]: list(operation)), { ...store, players:room_reset, counter: 0n });  
 };
 
 let main = ((action, store): (roomEntrypoints, storage)) : returnType =>
     switch (action) {
     | EnterRoom(param) => enter_room(param, store)
     | Refund(param) => refund(param, store)
+    | EndGame(param) => endgame(param,store)
     };
