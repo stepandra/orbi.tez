@@ -1,0 +1,50 @@
+.lp {
+    &__text {
+        padding: 0 50px;
+        text-align: center;
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    &__btn {
+        margin-top: 50px;
+    }
+}
+
+.bgVideo {
+    // background: url(video-poster.jpg) no-repeat #94a233;
+    // background-size: cover;
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    &__video {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+    }
+}
+
+
+
+@media (max-width: 767px) {
+    .bgVideo {
+        background: url('/img/lp-bg-poster.png') center center / cover no-repeat;
+
+        &__video {
+            display: none;
+        }
+    }
+}

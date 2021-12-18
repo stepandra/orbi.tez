@@ -1,4 +1,5 @@
 import '../styles/style.scss'
+import '../styles/style-lp.scss'
 import '../styles/gallery.css'
 import '../styles/index.css'
 

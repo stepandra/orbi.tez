@@ -27,7 +27,7 @@ export default function dashboard() {
     }
 
     return (
-        <body>
+        <div class="background">
             <Head>
                 <meta charset="UTF-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,7 +36,7 @@ export default function dashboard() {
                 <link href='style.css' rel="stylesheet" />
             </Head>
             <header class="header">
-                <a class="header__link lBoardLink" href="/leaderboard">LEADERBOARD</a>
+                <a class="header__link link" href="/leaderboard">LEADERBOARD</a>
                 <h1 class="header__title">Dashboard</h1>
                 <div class="header__panel panel">
                     <div class="panel__icon">
@@ -107,7 +107,7 @@ export default function dashboard() {
                     <a class="btn btn--wide btn--second" href="/waiting-room">PLAY 10 XTZ</a> */}
                 </div>
             </main>
-        </body>
+        </div>
     )
 }
 
