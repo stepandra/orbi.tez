@@ -26,7 +26,6 @@ type roomEntrypoints =
 // | PauseEntry(bool)
 // | ModifySetup(modifySetupParameter);
 type register = map (address, nat);
-
 type storage = {
     // admin: address,
     // start_block: nat,
@@ -53,20 +52,19 @@ let addr_to_contract = (addr: address) => {
         | None => (failwith ("Contract not found.") : contract (unit))
         };
     }
-
     let removePlayer = ( store : storage ): map(address, nat) => {
     let player_refund: option (nat) = Map.find_opt(Tezos.sender, store.players);
     switch (player_refund) {
         | Some (entrys) => Map.remove(Tezos.sender, store.players)
         | None => (failwith ("Nothing to refund!"): map(address, nat))
-        };
-    }
+    };
+}
 
 
 // TODO:Refun
 let refund  = ((action, store): (refundParameter, storage)) : returnType => {
     // let refund_addr = param.refundAddr;
-    // let dest:address = (Tezos.sender);git 
+    // let dest:address = (Tezos.sender);
     if (Map.size(store.players) == 10n) {
         (failwith ("Game already started! Play or die!"): returnType);
     } else {

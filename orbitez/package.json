@@ -1,0 +1,26 @@
+{
+  "name": "orbitez",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@airgap/beacon-sdk": "^2.3.8",
+    "@microsoft/signalr": "^6.0.1",
+    "@taquito/beacon-wallet": "^11.1.0",
+    "@taquito/taquito": "^11.1.0",
+    "@taquito/tezbridge-signer": "^11.1.0",
+    "axios": "^0.24.0",
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.45.0"
+  },
+  "devDependencies": {
+    "eslint": "8.4.1",
+    "eslint-config-next": "12.0.7"
+  }
+}
