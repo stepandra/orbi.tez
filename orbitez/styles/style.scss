@@ -56,10 +56,6 @@
 body {
 	min-width: 320px;
 	background-color: #081037;
-	//background-position: center;
-	background-repeat: no-repeat;
-	//background-size: cover;
-	background-image: url(img/bg.jpg);
 	color: #FFFFFF;
 	font-family: $font-sci-fi;
 	font-weight: 400;
@@ -67,10 +63,6 @@ body {
 	line-height: 1.5;
 	position: relative;
 	overflow-x: hidden;
-
-	&.bgImageNone { // only for hud page
-		background-image: none;
-	}
 }
 
 img {
@@ -127,6 +119,15 @@ select {
 /*---------------------------------------------------------------*/
 /* 02. Structure
 /*---------------------------------------------------------------*/
+.background {
+	width: 100vw;
+    height: 100vh;
+	//background-position: center;
+	background-repeat: no-repeat;
+	//background-size: cover;
+	background-image: url(img/bg.jpg);
+}
+
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -212,6 +213,20 @@ select {
 	// TODO: refactor
 	&--second {
 		margin-top: 48px;
+	}
+
+	&--neon {
+		background-image: url("img/btn-bg.png");
+		background-repeat: no-repeat;
+		border: 1px solid #FFFFFF;
+		background-color: rgba(4, 219, 224, 0.11);
+		box-shadow: inset 0px 5px 76px 0px rgba(4, 219, 224, 0.3), 0 0 10px 5px #04dbe0;
+	}
+}
+
+.pageNav {
+	& > * {
+		margin: 50px auto;
 	}
 }
 
@@ -341,7 +356,7 @@ select {
 	}
 }
 
-.lBoardLink {
+.link {
 	color: #FFFFFF;
 	font-size: 28px;
 	line-height: 32px;
