@@ -2,20 +2,26 @@ import { TezosToolkit } from "@taquito/taquito"
 import { BeaconWallet } from "@taquito/beacon-wallet"
 import { NetworkType } from "@airgap/beacon-sdk"
 import { useState, useEffect, memo } from 'react'
+import { NFT_ADDRESS } from '../constants'
 const signalR = require("@microsoft/signalr");
 
 export function useTezos() {
-  const RPC_URL = 'https://rpc.hangzhounet.teztnets.xyz'
+  const RPC_URL = 'https://hangzhounet.smartpy.io'
   const Tezos = new TezosToolkit(RPC_URL)
   const wallet = new BeaconWallet({ name: "Orbitez" })
-
+  const [balance, setBalance] = useState(0)
   Tezos.setWalletProvider(wallet)
 
   const [address, setAddress] = useState('')
+
+  useEffect(() => {
+    updateBalance()
+  }, [address])
+  
   useEffect(() => {
     
     connectionExistsCheck()
-
+    
     const connection = new signalR.HubConnectionBuilder()
     .withUrl("https://api.hangzhou2net.tzkt.io/v1/events") //https://api.tzkt.io/ MAINNEt
     .build();
@@ -55,6 +61,12 @@ export function useTezos() {
     } 
     return false
   }
+  
+  const updateBalance = async () => {
+    if (address == '') return
+    const bal = await Tezos.rpc.getBalance(address)
+    setBalance(bal.toNumber() / 1000000)
+  }
 
   const connectWallet = async () => {
     const connectionExists = await connectionExistsCheck()
@@ -65,8 +77,10 @@ export function useTezos() {
       },})
       const addr = await wallet.getPKH()
       setAddress(addr)
-      console.log("New connection: ", addr)
     } else {
+      const nft = await Tezos.contract.at(NFT_ADDRESS)
+      // console.log(nft.methods.balance_of([{owner: address, token_id: 1}], 'KT1NXgqXUfYFowmoZK6FhUTxmcqkjzZnV5rg').send())
+      // console.log("New connection: ", address)
       alert(`Already connected`)
     }
   }
@@ -83,7 +97,8 @@ export function useTezos() {
     disconnectWallet,
     wallet,
     Tezos,
-    address
+    address,
+    balance
   }
 }
 
