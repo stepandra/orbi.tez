@@ -2,9 +2,8 @@ type enterRoomParameter = {
     is_lp: bool,
     bank: tez
 }
-type refundParameter = {
-    refundAddr: address,
-};
+type refundParameter = (address);
+
 // type endGameParameter = map(address)
 // type modifySetupParameter = {
 //     mod_blocks_in_round: nat, 
@@ -36,21 +35,39 @@ type storage = {
     // leaderboard: list(address),
     counter: nat,
 }
-
+    
 type returnType = (list (operation), storage);
 
-// TODO: Refun
+let addr_to_contract = (addr: address) => {
+    let maybe_contract: option(contract(unit)) = Tezos.get_contract_opt(addr);
+    switch (maybe_contract) {
+        | Some (contract) => contract
+        | None => (failwith ("Contract not found.") : contract (unit))
+        };
+    }
+    let removePlayer = ( store : storage ): map(address, nat) => {
+    let player_refund: option (nat) = Map.find_opt(Tezos.sender, store.players);
+    switch (player_refund) {
+        | Some (entrys) => Map.remove(Tezos.sender, store.players)
+        | None => (failwith ("Nothing to refund!"): map(address, nat))
+    };
+}
+
+
+// TODO:Refun
 let refund  = ((action, store): (refundParameter, storage)) : returnType => {
     // let refund_addr = param.refundAddr;
-    let dest:address = (Tezos.sender);
-    let counter : contract(refundParameter) =
-    switch (Tezos.get_contract_opt (dest) : option (contract (refundParameter))) {
-    | Some (contract) => contract;
-    | None => (failwith ("Contract not found.") : contract (refundParameter));
-    };
-    let op: operation = Tezos.transaction(action, 1tez, counter);
-    (([op]: list(operation)), store);
+    // let dest:address = (Tezos.sender);
+    if (Map.size(store.players) == 10n) {
+        (failwith ("Game already started! Play or die!"): returnType);
+    } else {
+    // let counter : contract(refundParameter) =
+    let dest = addr_to_contract(Tezos.sender);
+    let op = Tezos.transaction((), 1tez, dest);
+    (([op]: list(operation)), {...store, players: removePlayer(store)})
+    }
 } 
+
 
 let addPlayer = ( store : storage ): map(address,nat) => {
     let  player_points: option (nat) = Map.find_opt(Tezos.sender, store.players);
@@ -62,8 +79,11 @@ let addPlayer = ( store : storage ): map(address,nat) => {
     };
 };
 
+[@inline]
+let add = ((s, counter): (storage, nat)): storage => {...s, counter: s.counter + counter};
+
 let enter_room = ((param, store): (enterRoomParameter, storage)) : returnType => {
-    let add = ((s, counter): (storage, nat)): storage => {...s, counter: s.counter + counter};
+
     let is_lp = param.is_lp;
     let bank = param.bank;
     let players = store.players;
@@ -71,7 +91,7 @@ let enter_room = ((param, store): (enterRoomParameter, storage)) : returnType =>
     let enter_price: tez = 1tez;
     if (Tezos.amount == enter_price) {
         if (Map.size(players) > 9n) {
-            failwith("Room is full, go fuck yourself!")
+            failwith("Room is full, try again later!")
             } else {
             //   let new_map = (m : register) : register => Map.add ((Tezos.sender : address), store.counter, store.players);
             // let add_player = ((players, s): (storage, storage)): map( address, int) => {...s, players : new_map } ;
