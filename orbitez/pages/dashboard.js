@@ -33,9 +33,8 @@ export default function dashboard() {
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Dashboard - Orbitez.io</title>
-                <link href='style.css' rel="stylesheet" />
             </Head>
-            <header class="header">
+            <header class="header container">
                 <a class="header__link link" href="/leaderboard">LEADERBOARD</a>
                 <h1 class="header__title">Dashboard</h1>
                 <div class="header__panel panel">
