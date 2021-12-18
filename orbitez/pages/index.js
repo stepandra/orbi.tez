@@ -26,9 +26,9 @@ export default function lending() {
                 <a class="lp__btn btn btn--center btn--neon" href="">MINT NFT 1 XTZ</a>
             </main>
 
-            <video class="bgVideo__video" loop muted autoplay poster="/img/lp-bg-poster.png">
-                <source src="/video/lp-bg-video-8.mp4" type="video/mp4" />
-                <source src="/video/lp-bg-video-8.webm" type="video/webm" />
+            <video  loop muted autoplay poster="/img/lp-bg-poster.png" class="bgVideo__video">
+                <source src="https://murashkilingerie.com/public/uploads/lp-bg-video-8.mp4" type="video/mp4" ></source>
+                <source src="https://murashkilingerie.com/public/uploads/lp-bg-video-8.webm" type="video/webm" ></source>
             </video>
             <div class="bgVideo__overlay"></div>
         </div>
