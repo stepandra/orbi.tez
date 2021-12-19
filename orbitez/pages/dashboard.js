@@ -29,22 +29,28 @@ export default function dashboard() {
     return (
         <div class="background">
             <Head>
-                <meta charset="UTF-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Dashboard - Orbitez.io</title>
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+                <link rel="manifest" href="/site.webmanifest"/>
+                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
+                <meta name="msapplication-TileColor" content="#da532c"/>
+                <meta name="theme-color" content="#ffffff" />
             </Head>
             <header class="header container">
-                <a class="header__link link" href="/leaderboard">LEADERBOARD</a>
+                <a class="header__linkLeft link" href="/leaderboard">LEADERBOARD</a>
                 <h1 class="header__title">Dashboard</h1>
                 <div class="header__panel panel">
                     <div class="panel__icon">
                         <a class="panel__link" href="">
-                            <img class="panel__img" src="/img/icon-home.png" alt="Home icon" />
+                            <img class="panel__img" src="/img/icon-exite.png" alt="Exite icon" />
                         </a>
                     </div>
                     <div class="panel__info">
-                        <p style={{ cursor: 'pointer' }} onClick={() => connectWallet()} class="panel__text">{address == '' ? 'CONNECT WALLET' : 'BALANCE'}</p>
+                        <p onClick={() => connectWallet()} class="panel__text">{address == '' ? 'CONNECT WALLET' : 'BALANCE'}</p>
                         {address != '' && <p class="panel__num">ꜩ{balance.toFixed(3)}</p>}
                     </div>
                 </div>
@@ -71,6 +77,15 @@ export default function dashboard() {
                         </ul>
                     </div>
                     { address !== '' && <a class="btn btn--wide" onClick={() => mintNft()}>MINT NEW NFT</a>}
+
+                    <div class="payMethod">
+                        <h3 class="payMethod__title">Payment method</h3>
+                        <div class="payMethod__switcher">
+                            <img class="payMethod__prev" src='/img/icon-prev.png'></img>
+                            <p class="payMethod__item">LP Token</p>
+                            <img class="payMethod__next" src='/img/icon-prev.png'></img>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="page__center">
@@ -78,7 +93,7 @@ export default function dashboard() {
                         <img class="planet__img" src="/img/planet.png" alt="planet background" />
                         <a onClick={() => { 
                             address == '' ? connectWallet() : enterRoom() 
-                        }} class="planet__btn btn btn--center" >
+                        }} class="planet__btn btn btn--center btn--neon" >
                             {
                                 address == ''
                                 ? 'Connect wallet'
