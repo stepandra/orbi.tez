@@ -8,7 +8,7 @@ P2E canvas game with NFT pass/skin and DeFi mechanics
 - [Dashboard ](https://orbitez.io/dashboard)
 
 
-- [Latest room contract: KT1XBiXsYnZdzGQPb2yi6EeEPQoUqAh7xUCf](https://better-call.dev/hangzhou2net/KT1XBiXsYnZdzGQPb2yi6EeEPQoUqAh7xUCf/operations)
+- [Latest room contract: KT1MvVwGsxMSSvoJd8iQJ1ykcrF6LBNmXqYs](https://better-call.dev/hangzhou2net/KT1MvVwGsxMSSvoJd8iQJ1ykcrF6LBNmXqYs/operations)
 - [ORB token FA2 contract: KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg](https://better-call.dev/hangzhou2net/KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg/operations)
 
 ## Transactions flow | Liquidity Mechanics
