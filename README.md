@@ -6,6 +6,7 @@ P2E canvas game with NFT pass/skin and DeFi mechanics
 
 - [Landing page ](https://orbitez.io)
 - [Dashboard ](https://orbitez.io/dashboard)
+- [Demo mode ](https://orbitez.io/hud)
 
 
 - [Latest room contract: KT1MvVwGsxMSSvoJd8iQJ1ykcrF6LBNmXqYs](https://better-call.dev/hangzhou2net/KT1MvVwGsxMSSvoJd8iQJ1ykcrF6LBNmXqYs/operations)
