@@ -11,6 +11,7 @@ P2E canvas game with NFT pass/skin and DeFi mechanics
 
 - [Latest room contract: KT1MvVwGsxMSSvoJd8iQJ1ykcrF6LBNmXqYs](https://better-call.dev/hangzhou2net/KT1KFneVK82gYXA8z27bbb5aS8snyAZFiYay/interact?entrypoint=enterRoom)
 - [ORB token FA2 contract: KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg](https://better-call.dev/hangzhou2net/KT1VSEeZZ5SiKeUGmEf7Drh4tRinNzEUBEJg/operations)
+- [fxhash Generative Token ](https://www.fxhash.xyz/generative/3808)
 
 
 Room Contract
