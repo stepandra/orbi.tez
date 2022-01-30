@@ -35,8 +35,8 @@ Entrypoints: EnterRoom, Refund, EndGame
 
 ## Planned
 
-- [ ] Animated Orbitoid(planet) in action!
-- [ ] Play with your own FA2 NFT as a skin in orbitez game (hold 100 ORB token to unlock this feature)
+- [x] Animated Orbitoid(planet) in action!
+- [x] Play with your own FA2 NFT as a skin in orbitez game (hold 100 ORB token to unlock this feature)
 - [ ] ORB token farming (incentivize farmers to bet in LP as good as players to farm with ORB rewards)
 - [ ] Agar(orbitez) proof of leaderboard (Merkle tree -> own tzstamp server). 
 - [ ] Each block send tx with merkle tree of all player key events in the game
